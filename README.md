@@ -35,3 +35,26 @@ and configuring the emulator manually.
 See [firebase-emulator](./firebase-emulator) folder for additional details.
 
 [firebase-emulator]: https://firebase.google.com/docs/emulator-suite
+
+# Docker Compose
+
+You can find an example [Docker Compose][docker-compose] [configuration](./docker-compose.yml) 
+that one may use to start up the emulators altogether with just a single 
+`docker-compose up` command.
+
+[docker-compose]: https://docs.docker.com/compose/
+
+# GCP Container Registry
+
+Sometimes usage of the public [Docker Hub][docker-hub] images may be not a good idea due 
+to the security restrictions or images pull performance/cost implications.
+
+For such a use case we provide a reusable [Cloud Build][cloud-build] configurations that allows 
+building and deploying the emulators to a private [Google Container Registry][gcr] images registry.
+
+Look for a `cloudbuild.yaml` file in the emulator folders, and a top-level [one](./cloudbuild.yaml) 
+to build them all together.
+
+[docker-hub]: https://hub.docker.com/
+[cloud-build]: https://cloud.google.com/cloud-build
+[gcr]: https://cloud.google.com/container-registry/
