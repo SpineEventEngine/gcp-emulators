@@ -10,7 +10,7 @@ The easiest way to start the emulator is to run the following command:
 docker run \
     --rm \
     -p=9090:9090 \
-    --env="GCP_PROJECT=<GCP_PROJECT>" \
+    --env="GCP_PROJECT=<your-gcp-project>" \
     --volume="$PWD/appengine/configs:/configs" \
     cloudtasks-emulator
 ```
