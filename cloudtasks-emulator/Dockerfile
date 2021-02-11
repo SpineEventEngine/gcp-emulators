@@ -8,7 +8,7 @@ RUN pip install wheel setuptools
 RUN pip install --requirement /requirements.txt --no-warn-script-location --no-cache-dir
 
 FROM python:3.7-slim AS app-env
-LABEL "maintainer"="Yuri.Sergiichuk@teamdev.com" \
+LABEL "maintainer"="developers@spine.io" \
       "emulator"="CloudTasks"
 
 ENV GCP_PROJECT="change-me"
