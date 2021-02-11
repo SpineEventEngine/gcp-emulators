@@ -1,1 +1,2 @@
-gcloud-tasks-emulator==0.5.1
+# gcloud-tasks-emulator==0.5.1
+git+https://gitlab.com/xSAVIKx/gcloud-tasks-emulator.git@ed3272b38b898816b5e37cb29d5269f4697fe0ee#egg=gcloud-tasks-emulator
