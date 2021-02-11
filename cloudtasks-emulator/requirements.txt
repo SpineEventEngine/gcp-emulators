@@ -1,0 +1,1 @@
+gcloud-tasks-emulator==0.5.1

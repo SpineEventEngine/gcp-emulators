@@ -1,0 +1,16 @@
+#
+# This Cloud Build configuration builds Cloud Tasks emulator Docker image and stores it
+# in the GCP project of choice.
+#
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    id: "cloudtasks-emulator"
+    args: [
+        "build",
+        "-t", "gcr.io/${PROJECT_ID}/cloudtasks-emulator",
+        "."
+    ]
+
+images: [
+    "gcr.io/${PROJECT_ID}/cloudtasks-emulator"
+]
