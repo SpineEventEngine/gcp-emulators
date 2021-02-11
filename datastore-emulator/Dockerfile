@@ -42,7 +42,7 @@ ENV GCP_PROJECT="change-me"
 ENV EMULATOR_PORT="8081"
 ENV DATASTORE_CONSISTENCY="1.0"
 
-COPY ./runner.sh /
+COPY ./runner.sh ./LICENSE /
 RUN chmod +x /runner.sh
 
 ENTRYPOINT [ "/runner.sh" ]

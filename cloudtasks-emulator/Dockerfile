@@ -50,7 +50,7 @@ VOLUME /configs
 
 COPY --from=build-env /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
 
-COPY ./runner.sh /
+COPY ./runner.sh ./LICENSE /
 RUN chmod +x /runner.sh
 
 ENTRYPOINT [ "/runner.sh" ]

@@ -50,7 +50,7 @@ ENV EMULATORS_HOST="0.0.0.0"
 RUN mkdir /firebase
 VOLUME /firebase
 
-COPY ./runner.sh ./process_config.js /
+COPY ./runner.sh ./process_config.js ./LICENSE /
 RUN chmod +x /runner.sh
 
 WORKDIR /firebase
