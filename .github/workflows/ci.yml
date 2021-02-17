@@ -36,11 +36,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./cloudtasks-emulator
-          push: true
+          push: github.ref == 'refs/heads/master'
           tags: spine3/cloudtasks-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Update CloudTasks repo description
+        if: github.ref == 'refs/heads/master'
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -75,11 +76,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./datastore-emulator
-          push: true
+          push: github.ref == 'refs/heads/master'
           tags: spine3/datastore-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Update Datastore repo description
+        if: github.ref == 'refs/heads/master'
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -114,11 +116,12 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./firebase-emulator
-          push: true
+          push: github.ref == 'refs/heads/master'
           tags: spine3/firebase-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Update Datastore repo description
+        if: github.ref == 'refs/heads/master'
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
