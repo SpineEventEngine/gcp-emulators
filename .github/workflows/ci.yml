@@ -51,3 +51,4 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: spine3/cloudtasks-emulator
+          readme-filepath: ./cloudtasks-emulator/README.md
