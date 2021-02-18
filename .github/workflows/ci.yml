@@ -120,7 +120,7 @@ jobs:
           tags: spine3/firebase-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Update Datastore repo description
+      - name: Update Firebase repo description
         if: github.ref == 'refs/heads/master'
         uses: peter-evans/dockerhub-description@v2
         with:
