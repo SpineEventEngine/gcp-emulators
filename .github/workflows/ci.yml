@@ -36,7 +36,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./cloudtasks-emulator
-          push: github.ref == 'refs/heads/master'
+          push: endsWith(github.ref, 'refs/heads/fix-publishing')
           tags: spine3/cloudtasks-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
@@ -76,7 +76,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./datastore-emulator
-          push: github.ref == 'refs/heads/master'
+          push: endsWith(github.ref, 'refs/heads/fix-publishing')
           tags: spine3/datastore-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
@@ -116,7 +116,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./firebase-emulator
-          push: github.ref == 'refs/heads/master'
+          push: endsWith(github.ref, 'refs/heads/fix-publishing')
           tags: spine3/firebase-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
