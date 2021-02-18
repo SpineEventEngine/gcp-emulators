@@ -18,10 +18,17 @@ See [cloudtasks-emulator](./cloudtasks-emulator) folder for additional details.
 Or start the emulator with the following command:
 
 ```bash
+cat <<EOT >> queue.yaml
+queue:
+  - name: default
+    rate: 1/s
+EOT
+
 docker run \
   --rm \
   -p=9090:9090 \
   --env="GCP_PROJECT=my-project" \
+  --volume="$PWD/queue.yaml:/configs/queue.yaml" \
   spine3/cloudtasks-emulator
 ```
 
