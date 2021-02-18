@@ -76,6 +76,9 @@ docker run \
   spine3/firebase-emulator
 ```
 
+By default, the container starts the whole Firebase [emulators suite][firebase-emulator] and
+the command above exposes their TCP ports.
+
 [firebase-emulator]: https://firebase.google.com/docs/emulator-suite
 
 # Docker Compose
