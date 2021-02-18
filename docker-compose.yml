@@ -1,0 +1,37 @@
+#
+# An example Docker Compose configuration that uses all the provided emulators together.
+#
+version: "3.9"
+services:
+  cloudtasks-emulator:
+    image: cloudtasks-emulator
+    ports:
+      - target: 9999
+        published: 9090
+        protocol: tcp
+    environment:
+      GCP_PROJECT: "<GCP_PROJECT>"
+      EMULATOR_PORT: "9999"
+    volumes:
+      - type: bind
+        source: ".<folder-with-queue.yaml>"
+        target: /configs
+        volume:
+          nocopy: true
+  datastore-emulator:
+    image: datastore-emulator
+    ports:
+      - target: 9999
+        published: 8081
+        protocol: tcp
+    environment:
+      GCP_PROJECT: "<GCP_PROJECT>"
+      EMULATOR_PORT: "9999"
+  firebase-emulator:
+    image: firebase-emulator
+    ports:
+      - target: 9999
+        published: 54897
+        protocol: tcp
+    environment:
+      RDB_EMULATOR_PORT: "9999"
