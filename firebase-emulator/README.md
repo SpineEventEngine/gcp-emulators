@@ -16,7 +16,7 @@ docker run \
   -p=8085:8085 \
   -p=5001:5001 \
   --env "GCP_PROJECT=<your-gcp-project>" \
-  firebase-emulator
+  spine3/firebase-emulator
 ```
 
 The command above starts the container and exposes ports of all Firebase emulators.

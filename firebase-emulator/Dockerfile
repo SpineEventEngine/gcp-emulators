@@ -30,7 +30,7 @@ LABEL "maintainer"="developers@spine.io"
 LABEL "version"="1.0.0"
 LABEL "io.spine.emulator"="Datastore"
 
-RUN apk add --no-cache python3 py3-pip openjdk11-jre && \
+RUN apk add --no-cache python3 py3-pip openjdk11-jre bash && \
     npm install -g firebase-tools && \
     firebase setup:emulators:database && \
     firebase setup:emulators:firestore && \

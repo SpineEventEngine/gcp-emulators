@@ -15,6 +15,23 @@ the [Cloud Tasks][cloud-tasks] APIs locally.
 
 See [cloudtasks-emulator](./cloudtasks-emulator) folder for additional details.
 
+Or start the emulator with the following command:
+
+```bash
+cat <<EOT >> queue.yaml
+queue:
+  - name: default
+    rate: 1/s
+EOT
+
+docker run \
+  --rm \
+  -p=9090:9090 \
+  --env="GCP_PROJECT=my-project" \
+  --volume="$PWD/queue.yaml:/configs/queue.yaml" \
+  spine3/cloudtasks-emulator
+```
+
 [cloud-tasks-emulator]: https://gitlab.com/potato-oss/google-cloud/gcloud-tasks-emulator
 [cloud-tasks]: https://cloud.google.com/tasks
 
@@ -25,6 +42,16 @@ of installing and configuring it locally.
 
 See [datastore-emulator](./datastore-emulator) folder for additional details.
 
+Or start the emulator with the following command:
+
+```bash
+docker run \
+  --rm \
+  -p=8081:8081 \
+  --env "GCP_PROJECT=my-project" \
+  spine3/datastore-emulator
+```
+
 [datastore-emulator]: https://cloud.google.com/sdk/gcloud/reference/beta/emulators/datastore
 
 ## Firebase
@@ -33,6 +60,24 @@ The [Firebase emulator][firebase-emulator] image allows reducing the hustle of s
 and configuring the emulator manually.
 
 See [firebase-emulator](./firebase-emulator) folder for additional details.
+
+Or start the emulator with the following command:
+
+```bash
+docker run \
+  --rm \
+  -p=9000:9000 \
+  -p=8080:8080 \
+  -p=4000:4000 \
+  -p=9099:9099 \
+  -p=8085:8085 \
+  -p=5001:5001 \
+  --env "GCP_PROJECT=my-project" \
+  spine3/firebase-emulator
+```
+
+By default, the container starts the whole Firebase [emulators suite][firebase-emulator] and
+the command above exposes their TCP ports.
 
 [firebase-emulator]: https://firebase.google.com/docs/emulator-suite
 
