@@ -7,7 +7,11 @@ to installing and configuring it locally.
 The easiest way to start the emulator is to run the following command:
 
 ```bash
-docker run --rm -p=8081:8081 --env "GCP_PROJECT=<your-gcp-project>" datastore-emulator
+docker run \
+  --rm \
+  -p=8081:8081 \
+  --env "GCP_PROJECT=<your-gcp-project>" \
+  spine3/datastore-emulator
 ```
 
 The command above starts the emulator and exposes it on the default `8081` port.

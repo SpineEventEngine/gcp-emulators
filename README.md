@@ -19,10 +19,10 @@ Or start the emulator with the following command:
 
 ```bash
 docker run \
-    --rm \
-    -p=9090:9090 \
-    --env="GCP_PROJECT=my-project" \
-    spine3/cloudtasks-emulator
+  --rm \
+  -p=9090:9090 \
+  --env="GCP_PROJECT=my-project" \
+  spine3/cloudtasks-emulator
 ```
 
 [cloud-tasks-emulator]: https://gitlab.com/potato-oss/google-cloud/gcloud-tasks-emulator

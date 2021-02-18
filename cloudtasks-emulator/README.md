@@ -8,11 +8,11 @@ The easiest way to start the emulator is to run the following command:
 
 ```bash
 docker run \
-    --rm \
-    -p=9090:9090 \
-    --env="GCP_PROJECT=<your-gcp-project>" \
-    --volume="$PWD/appengine/configs:/configs" \
-    cloudtasks-emulator
+  --rm \
+  -p=9090:9090 \
+  --env="GCP_PROJECT=<your-gcp-project>" \
+  --volume="$PWD/appengine/configs:/configs" \
+  spine3/cloudtasks-emulator
 ```
 
 The command above starts the emulator and exposes it on the default `9090` port assuming
