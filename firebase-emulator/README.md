@@ -82,7 +82,7 @@ docker run \
     --publish "9999:9999" \
     --volume "$PWD/firebase_configs:/firebase" \
     --rm \
-    firebase-emulator
+    spine3/firebase-emulator
 ```
 
 #### Start more emulators
