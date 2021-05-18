@@ -28,7 +28,7 @@ the configuration files.
 
 The `GCP_PROJECT` environment variable is the only one required and holds the name of the
 GCP project for which the emulator is being started.
-
+ 
 Other `EMULATOR_` environment variables configure the Firebase emulators suite and use
 the same defaults as the emulator's suite.
 
