@@ -72,6 +72,7 @@ docker run \
   -p=9099:9099 \
   -p=8085:8085 \
   -p=5001:5001 \
+  -p=9199:9199 \
   --env "GCP_PROJECT=my-project" \
   spine3/firebase-emulator
 ```

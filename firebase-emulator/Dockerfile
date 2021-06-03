@@ -35,6 +35,7 @@ RUN apk add --no-cache python3 py3-pip openjdk11-jre bash && \
     firebase setup:emulators:database && \
     firebase setup:emulators:firestore && \
     firebase setup:emulators:pubsub && \
+    firebase setup:emulators:storage && \
     rm -rf /var/cache/apk/*
 
 ENV GCP_PROJECT="change-me"
@@ -45,6 +46,7 @@ ENV UI_ENABLED="true"
 ENV AUTH_EMULATOR_PORT="9099"
 ENV PUBSUB_EMULATOR_PORT="8085"
 ENV FUNCTIONS_EMULATOR_PORT="5001"
+ENV STORAGE_EMULATOR_PORT="9199"
 ENV EMULATORS_HOST="0.0.0.0"
 
 RUN mkdir /firebase

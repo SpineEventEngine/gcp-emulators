@@ -15,6 +15,7 @@ docker run \
   -p=9099:9099 \
   -p=8085:8085 \
   -p=5001:5001 \
+  -p=9199:9199 \
   --env "GCP_PROJECT=<your-gcp-project>" \
   spine3/firebase-emulator
 ```
@@ -41,6 +42,7 @@ the same defaults as the emulator's suite.
 | AUTH_EMULATOR_PORT      | Firebase Authentication | 9099          |
 | PUBSUB_EMULATOR_PORT    | Pub/Sub                 | 8085          |
 | FUNCTIONS_EMULATOR_PORT | Firebase Functions      | 5001          |
+| STORAGE_EMULATOR_PORT   | Cloud Storage           | 9199          |
 
 The `EMULATORS_HOST` variable configures the host used by all the emulators and defaults to `0
 
@@ -132,6 +134,10 @@ and also starts the [emulators UI][emulator-ui].
     },
     "hosting": {
       "port": "50033",
+      "host": "0.0.0.0"
+    },
+    "storage": {
+      "port": "9199",
       "host": "0.0.0.0"
     }
   }

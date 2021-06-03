@@ -50,6 +50,9 @@ function logCurrentConfig() {
  */
 function generateConfig() {
     const firebaseConfig = {
+        "storage": {
+            "rules": "./storage.rules"
+        },
         "emulators": {
             "firestore": {
                 "port": process.env.FIRESTORE_EMULATOR_PORT,
@@ -74,6 +77,10 @@ function generateConfig() {
             },
             "pubsub": {
                 "port": process.env.PUBSUB_EMULATOR_PORT,
+                "host": process.env.EMULATORS_HOST
+            },
+            "storage": {
+                "port": process.env.STORAGE_EMULATOR_PORT,
                 "host": process.env.EMULATORS_HOST
             }
         }
