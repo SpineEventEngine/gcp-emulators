@@ -1,7 +1,7 @@
-Firebase RDB emulator
+Firebase Emulator Suite container
 ---------
 
-The [Firebase Realtime Database emulator][emulator] image allows reducing the hustle of setting up 
+The [Firebase Emulator Suite][emulator] image allows reducing the hustle of setting up 
 and configuring the emulator manually.
 
 The easiest way to start the emulator is to run the following command:
