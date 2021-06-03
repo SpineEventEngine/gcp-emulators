@@ -36,6 +36,7 @@ RUN apk add --no-cache python3 py3-pip openjdk11-jre bash && \
     firebase setup:emulators:firestore && \
     firebase setup:emulators:pubsub && \
     firebase setup:emulators:storage && \
+    firebase setup:emulators:ui && \
     rm -rf /var/cache/apk/*
 
 ENV GCP_PROJECT="change-me"
