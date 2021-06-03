@@ -28,7 +28,8 @@
 
 const fs = require('fs');
 
-const configPath = "/firebase/firebase.json";
+const configFolder = "/firebase";
+const configPath = `${configFolder}/firebase.json`;
 if (!fs.existsSync(configPath)) {
     generateConfig();
 } else {
@@ -49,6 +50,18 @@ function logCurrentConfig() {
  * environment variables.
  */
 function generateConfig() {
+    const denyAllStorageRules = `
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
+    `;
+    console.info("Generating Storage security rules.", denyAllStorageRules);
+    fs.writeFileSync(`${configFolder}/storage.rules`, denyAllStorageRules);
     const firebaseConfig = {
         "storage": {
             "rules": "./storage.rules"
