@@ -1,8 +1,8 @@
 Firebase Emulator Suite container
 ---------
 
-The [Firebase Emulator Suite][emulator] image allows reducing the hustle of setting up 
-and configuring the emulator manually.
+The [Firebase Emulator Suite][emulator] image allows reducing the hustle of setting up and
+configuring the emulator manually.
 
 The easiest way to start the emulator is to run the following command:
 
@@ -25,14 +25,14 @@ The command above starts the container and exposes ports of all Firebase emulato
 
 ## Configurations
 
-The image is configured using a set of environment variables, and an optional shared volume with
-the configuration files.
+The image is configured using a set of environment variables, and an optional shared volume with the
+configuration files.
 
-The `GCP_PROJECT` environment variable is the only one required and holds the name of the
-GCP project for which the emulator is being started.
+The `GCP_PROJECT` environment variable is the only one required and holds the name of the GCP
+project for which the emulator is being started.
 
-Other `EMULATOR_` environment variables configure the Firebase emulators suite and use
-the same defaults as the emulator's suite.
+Other `EMULATOR_` environment variables configure the Firebase emulators suite and use the same
+defaults as the emulator's suite.
 
 | Env variable            | Service                 | Default value |
 |-------------------------|-------------------------|---------------|
@@ -45,21 +45,20 @@ the same defaults as the emulator's suite.
 | FUNCTIONS_EMULATOR_PORT | Firebase Functions      | 5001          |
 | STORAGE_EMULATOR_PORT   | Cloud Storage           | 9199          |
 
-The `EMULATORS_HOST` variable configures the host used by all the emulators and defaults to `0
+The `EMULATORS_HOST` variable configures the host used by all the emulators and defaults to `0`.
 
-Inside the container, the emulator is configured using the [`firebase.json`][firebase-config] 
+Inside the container, the emulator is configured using the [`firebase.json`][firebase-config]
 located within the `/firebase` folder. The configuration file is generated on-the-fly from the
 specified environment variables if none is supplied as a [volume][docker-volume].
 
 ### Mount custom Firebase configuration
 
-It is also possible to mount a local `firebase.json` configuration to the `/firebase` folder and 
-thus use any user-supplied configurations. In such case the environment variables do not have
-any effect.
+It is also possible to mount a local `firebase.json` configuration to the `/firebase` folder and
+thus use any user-supplied configurations. In such case the environment variables do not have any
+effect.
 
 E.g. one may want to specify dedicated RDB security rules for the emulator with the following
-`firebase.json` content and a `firebase-rules.json` available in the same folder as the config
-file:
+`firebase.json` content and a `firebase-rules.json` available in the same folder as the config file:
 
 ```json
 {
@@ -75,9 +74,9 @@ file:
 }
 ```
 
-Assuming the `firebase.json` and `firebase-rules.json` are available under the 
-`$PWD/firebase_configs/` folder one can use the following command to use her own configurations 
-over the default:
+Assuming the `firebase.json` and `firebase-rules.json` are available under the
+`$PWD/firebase_configs/` folder one can use the following command to use her own configurations over
+the default:
 
 ```bash
 docker run \
@@ -90,11 +89,11 @@ docker run \
 
 #### Start more emulators
 
-With supplying a custom `firebase.json` one may benefit from configuring the emulators, and their 
+With supplying a custom `firebase.json` one may benefit from configuring the emulators, and their
 respective rules as needed.
 
-E.g. consider the following example that configures emulators with their respective setups
-and also starts the [emulators UI][emulator-ui].
+E.g. consider the following example that configures emulators with their respective setups and also
+starts the [emulators UI][emulator-ui].
 
 ```json firebase.json
 {
@@ -145,7 +144,18 @@ and also starts the [emulators UI][emulator-ui].
 }
 ```
 
+#### Provide emulators baseline data
+
+Some Firebase emulators provide a way to perform export and then import of the emulator state.
+
+The exported data mount to the `/firebase/baseline-data` folder will be automatically imported by
+the emulators during the startup.
+
+
 [emulator]: https://firebase.google.com/docs/emulator-suite/connect_rtdb
+
 [firebase-config]: https://firebase.google.com/docs/cli#the_firebasejson_file
+
 [emulator-ui]: https://firebase.google.com/docs/emulator-suite
+
 [docker-volume]: https://docs.docker.com/storage/volumes/

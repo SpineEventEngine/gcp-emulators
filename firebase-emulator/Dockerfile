@@ -50,7 +50,7 @@ ENV FUNCTIONS_EMULATOR_PORT="5001"
 ENV STORAGE_EMULATOR_PORT="9199"
 ENV EMULATORS_HOST="0.0.0.0"
 
-RUN mkdir /firebase
+RUN mkdir -p /firebase/baseline-data
 VOLUME /firebase
 
 COPY ./runner.sh ./process_config.js ./LICENSE /
