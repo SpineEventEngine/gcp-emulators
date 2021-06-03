@@ -28,7 +28,7 @@ FROM node:lts-alpine3.12 AS app-env
 
 LABEL "maintainer"="developers@spine.io"
 LABEL "version"="1.0.0"
-LABEL "io.spine.emulator"="Datastore"
+LABEL "io.spine.emulator"="Firebase"
 
 RUN apk add --no-cache python3 py3-pip openjdk11-jre bash && \
     npm install -g firebase-tools && \
