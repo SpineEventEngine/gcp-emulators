@@ -24,7 +24,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-FROM node:lts-alpine3.12 AS app-env
+FROM node:lts-alpine3.13 AS app-env
 
 LABEL "maintainer"="developers@spine.io"
 LABEL "version"="1.0.0"
