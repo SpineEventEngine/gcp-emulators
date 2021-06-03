@@ -66,4 +66,4 @@ export EMULATORS_HOST="${EMULATORS_HOST:-0.0.0.0}"
 
 node /process_config.js
 
-firebase emulators:start --project="${GCP_PROJECT}"
+firebase emulators:start --project="${GCP_PROJECT}" --import /firebase/baseline-data
