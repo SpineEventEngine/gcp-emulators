@@ -72,7 +72,7 @@ service firebase.storage {
                 "host": process.env.EMULATORS_HOST
             },
             "ui": {
-                "enabled": process.env.UI_EMULATOR_PORT === "true",
+                "enabled": process.env.UI_ENABLED === "true",
                 "port": process.env.UI_EMULATOR_PORT,
                 "host": process.env.EMULATORS_HOST
             },
