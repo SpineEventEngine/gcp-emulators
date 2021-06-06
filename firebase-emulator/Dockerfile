@@ -24,17 +24,19 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-FROM node:lts-alpine3.12 AS app-env
+FROM node:lts-alpine3.13 AS app-env
 
 LABEL "maintainer"="developers@spine.io"
-LABEL "version"="1.0.0"
-LABEL "io.spine.emulator"="Datastore"
+LABEL "version"="1.1.0"
+LABEL "io.spine.emulator"="Firebase"
 
 RUN apk add --no-cache python3 py3-pip openjdk11-jre bash && \
     npm install -g firebase-tools && \
     firebase setup:emulators:database && \
     firebase setup:emulators:firestore && \
     firebase setup:emulators:pubsub && \
+    firebase setup:emulators:storage && \
+    firebase setup:emulators:ui && \
     rm -rf /var/cache/apk/*
 
 ENV GCP_PROJECT="change-me"
@@ -45,9 +47,10 @@ ENV UI_ENABLED="true"
 ENV AUTH_EMULATOR_PORT="9099"
 ENV PUBSUB_EMULATOR_PORT="8085"
 ENV FUNCTIONS_EMULATOR_PORT="5001"
+ENV STORAGE_EMULATOR_PORT="9199"
 ENV EMULATORS_HOST="0.0.0.0"
 
-RUN mkdir /firebase
+RUN mkdir -p /firebase/baseline-data
 VOLUME /firebase
 
 COPY ./runner.sh ./process_config.js ./LICENSE /

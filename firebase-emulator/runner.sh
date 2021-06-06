@@ -61,8 +61,9 @@ export UI_ENABLED="${UI_ENABLED:-true}"
 export AUTH_EMULATOR_PORT="${AUTH_EMULATOR_PORT:-9099}"
 export PUBSUB_EMULATOR_PORT="${PUBSUB_EMULATOR_PORT:-8085}"
 export FUNCTIONS_EMULATOR_PORT="${FUNCTIONS_EMULATOR_PORT:-5001}"
+export STORAGE_EMULATOR_PORT="${STORAGE_EMULATOR_PORT:-9199}"
 export EMULATORS_HOST="${EMULATORS_HOST:-0.0.0.0}"
 
 node /process_config.js
 
-firebase emulators:start --project="${GCP_PROJECT}"
+firebase emulators:start --project="${GCP_PROJECT}" --import /firebase/baseline-data

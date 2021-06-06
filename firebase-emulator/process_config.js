@@ -28,7 +28,8 @@
 
 const fs = require('fs');
 
-const configPath = "/firebase/firebase.json";
+const configFolder = "/firebase";
+const configPath = `${configFolder}/firebase.json`;
 if (!fs.existsSync(configPath)) {
     generateConfig();
 } else {
@@ -49,14 +50,29 @@ function logCurrentConfig() {
  * environment variables.
  */
 function generateConfig() {
+    const denyAllStorageRules = `
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if true;
+    }
+  }
+}
+    `;
+    console.info("Generating Storage security rules.", denyAllStorageRules);
+    fs.writeFileSync(`${configFolder}/storage.rules`, denyAllStorageRules);
     const firebaseConfig = {
+        "storage": {
+            "rules": "./storage.rules"
+        },
         "emulators": {
             "firestore": {
                 "port": process.env.FIRESTORE_EMULATOR_PORT,
                 "host": process.env.EMULATORS_HOST
             },
             "ui": {
-                "enabled": process.env.UI_EMULATOR_PORT === "true",
+                "enabled": process.env.UI_ENABLED === "true",
                 "port": process.env.UI_EMULATOR_PORT,
                 "host": process.env.EMULATORS_HOST
             },
@@ -74,6 +90,10 @@ function generateConfig() {
             },
             "pubsub": {
                 "port": process.env.PUBSUB_EMULATOR_PORT,
+                "host": process.env.EMULATORS_HOST
+            },
+            "storage": {
+                "port": process.env.STORAGE_EMULATOR_PORT,
                 "host": process.env.EMULATORS_HOST
             }
         }
