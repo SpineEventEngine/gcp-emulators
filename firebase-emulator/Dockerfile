@@ -27,7 +27,7 @@
 FROM node:lts-alpine3.13 AS app-env
 
 LABEL "maintainer"="developers@spine.io"
-LABEL "version"="1.1.0"
+LABEL "version"="1.1.1"
 LABEL "io.spine.emulator"="Firebase"
 
 RUN apk add --no-cache python3 py3-pip openjdk11-jre bash && \
