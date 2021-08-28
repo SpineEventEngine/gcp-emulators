@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ '*' ]
+    branches: [ '*', '!master' ]
   workflow_dispatch:
 
 defaults:
@@ -27,27 +27,13 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and Push CloudTasks emulator
+      - name: Build CloudTasks emulator
         uses: docker/build-push-action@v2
         with:
           context: ./cloudtasks-emulator
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: spine3/cloudtasks-emulator:latest
+          push: false
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Update CloudTasks repo description
-        if: github.ref == 'refs/heads/master'
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: spine3/cloudtasks-emulator
-          readme-filepath: ./cloudtasks-emulator/README.md
 
   datastore:
     name: Build Datastore Emulator
@@ -67,27 +53,13 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and Push Datastore emulator
+      - name: Build Datastore emulator
         uses: docker/build-push-action@v2
         with:
           context: ./datastore-emulator
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: spine3/datastore-emulator:latest
+          push: false
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Update Datastore repo description
-        if: github.ref == 'refs/heads/master'
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: spine3/datastore-emulator
-          readme-filepath: ./datastore-emulator/README.md
 
   firebase:
     name: Build Firebase Emulator
@@ -107,24 +79,10 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and Push Firebase emulator
         uses: docker/build-push-action@v2
         with:
           context: ./firebase-emulator
-          push: ${{ github.ref == 'refs/heads/master' }}
-          tags: spine3/firebase-emulator:latest
+          push: false
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-      - name: Update Datastore repo description
-        if: github.ref == 'refs/heads/master'
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: spine3/firebase-emulator
-          readme-filepath: ./firebase-emulator/README.md
