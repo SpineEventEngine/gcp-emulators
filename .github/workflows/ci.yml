@@ -35,7 +35,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache-cloudtasks
           cache-to: type=local,dest=/tmp/.buildx-cache-cloudtasks
 
-  cloud-storage:
+  cloudstorage:
     name: Build Cloud Storage Emulator
     runs-on: ubuntu-20.04
     steps:

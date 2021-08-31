@@ -9,9 +9,34 @@ defaults:
   run:
     shell: bash
 jobs:
-  cloudtasks:
-    name: Build CloudTasks Emulator
+  # Detects per-folder changes inside the repository
+  changes:
     runs-on: ubuntu-20.04
+    outputs:
+      cloudtasks: ${{ steps.filter.outputs.cloudtasks }}
+      cloudstorage: ${{ steps.filter.outputs.cloudstorage }}
+      datastore: ${{ steps.filter.outputs.datastore }}
+      firebase: ${{ steps.filter.outputs.firebase }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          token: ${{ github.token }}
+          filters: |
+            cloudtasks:
+              - 'cloudtasks-emulator/**'
+            cloudstorage:
+              - 'cloudstorage-emulator/**'
+            datastore:
+              - 'datastore-emulator/**'
+            firebase:
+              - 'firebase-emulator/**'
+  cloudtasks:
+    name: Build and Publish CloudTasks Emulator
+    runs-on: ubuntu-20.04
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.cloudtasks == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -48,9 +73,11 @@ jobs:
           repository: spine3/cloudtasks-emulator
           readme-filepath: ./cloudtasks-emulator/README.md
 
-  cloud-storage:
-    name: Build Cloud Storage Emulator
+  cloudstorage:
+    name: Build and Publish Cloud Storage Emulator
     runs-on: ubuntu-20.04
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.cloudstorage == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -87,8 +114,10 @@ jobs:
           readme-filepath: ./cloudstorage-emulator/README.md
 
   datastore:
-    name: Build Datastore Emulator
+    name: Build and Publish Datastore Emulator
     runs-on: ubuntu-20.04
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.datastore == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -126,8 +155,10 @@ jobs:
           readme-filepath: ./datastore-emulator/README.md
 
   firebase:
-    name: Build Firebase Emulator
+    name: Build and Publish Firebase Emulator
     runs-on: ubuntu-20.04
+    needs: [ 'changes' ]
+    if: ${{ needs.changes.outputs.firebase == 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
