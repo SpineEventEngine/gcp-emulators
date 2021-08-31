@@ -27,7 +27,7 @@
 FROM gcr.io/google.com/cloudsdktool/cloud-sdk:alpine AS app-env
 
 LABEL "maintainer"="developers@spine.io"
-LABEL "version"="1.0.2"
+LABEL "version"="1.0.3"
 LABEL "io.spine.emulator"="Datastore"
 
 RUN apk add openjdk11-jre && \
