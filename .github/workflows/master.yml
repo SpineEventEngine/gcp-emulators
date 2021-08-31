@@ -62,7 +62,10 @@ jobs:
         with:
           context: ./cloudtasks-emulator
           push: true
-          tags: spine3/cloudtasks-emulator:latest
+          tags: |
+            spine3/cloudtasks-emulator:latest
+            spine3/cloudtasks-emulator:${GITHUB_SHA}
+            spine3/cloudtasks-emulator:${GITHUB_SHA:0:7}
           cache-from: type=local,src=/tmp/.buildx-cache-cloudtasks
           cache-to: type=local,dest=/tmp/.buildx-cache-cloudtasks
       - name: Update CloudTasks repo description
@@ -103,7 +106,10 @@ jobs:
         with:
           context: ./cloudstorage-emulator
           push: true
-          tags: spine3/cloudstorage-emulator:latest
+          tags: |
+            spine3/cloudstorage-emulator:latest
+            spine3/cloudstorage-emulator:${GITHUB_SHA}
+            spine3/cloudstorage-emulator:${GITHUB_SHA:0:7}
           cache-from: type=local,src=/tmp/.buildx-cache-cloudstorage
           cache-to: type=local,dest=/tmp/.buildx-cache-cloudstorage
       - name: Update Cloud Storage repo description
@@ -144,7 +150,10 @@ jobs:
         with:
           context: ./datastore-emulator
           push: true
-          tags: spine3/datastore-emulator:latest
+          tags: |
+            spine3/datastore-emulator:latest
+            spine3/datastore-emulator:${GITHUB_SHA}
+            spine3/datastore-emulator:${GITHUB_SHA:0:7}
           cache-from: type=local,src=/tmp/.buildx-cache-datastore
           cache-to: type=local,dest=/tmp/.buildx-cache-datastore
       - name: Update Datastore repo description
@@ -185,7 +194,10 @@ jobs:
         with:
           context: ./firebase-emulator
           push: true
-          tags: spine3/firebase-emulator:latest
+          tags: |
+            spine3/firebase-emulator:latest
+            spine3/firebase-emulator:${GITHUB_SHA}
+            spine3/firebase-emulator:${GITHUB_SHA:0:7}
           cache-from: type=local,src=/tmp/.buildx-cache-firebase
           cache-to: type=local,dest=/tmp/.buildx-cache-firebase
       - name: Update Datastore repo description
