@@ -26,7 +26,7 @@ jobs:
           path: /tmp/.buildx-cache-cloudtasks
           key: ${{ runner.os }}-buildx-cloudtasks-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-cloudtasks
+            ${{ runner.os }}-buildx-cloudtasks-
       - name: Build CloudTasks emulator
         uses: docker/build-push-action@v2
         with:
