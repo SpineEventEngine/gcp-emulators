@@ -1,7 +1,7 @@
-Datastore emulator
+Datastore Emulator
 ---------
 
-The [Datastore emulator][emulator] image allows starting the emulator without the need
+The [Datastore Emulator][emulator] image allows starting the emulator without the need
 to installing and configuring it locally.
 
 The easiest way to start the emulator is to run the following command:

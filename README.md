@@ -35,6 +35,25 @@ docker run \
 [cloud-tasks-emulator]: https://gitlab.com/potato-oss/google-cloud/gcloud-tasks-emulator
 [cloud-tasks]: https://cloud.google.com/tasks
 
+## Cloud Storage
+
+The [Cloud Storage emulator][cloud-storage-emulator] provides a way to work with
+the [Cloud Storage][cloud-storage] APIs locally.
+
+See [cloudstorage-emulator](./cloudstorage-emulator) folder for additional details.
+
+Or start the emulator with the following command:
+
+```bash
+docker run \
+  --rm \
+  -p=9199:9199 \
+  spine3/cloudstorage-emulator
+```
+
+[cloud-storage-emulator]: https://github.com/googleapis/google-cloud-cpp/tree/main/google/cloud/storage/emulator
+[cloud-storage]: https://cloud.google.com/storage
+
 ## Datastore
 
 The [Datastore emulator][datastore-emulator] image allows starting the emulator without the need

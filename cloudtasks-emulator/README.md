@@ -1,7 +1,7 @@
-Cloud Tasks emulator
+Cloud Tasks Emulator
 ---------
 
-The [Cloud Tasks emulator][emulator] provides a way to work with the [Cloud Tasks][cloud-tasks] 
+The [Cloud Tasks Emulator][emulator] provides a way to work with the [Cloud Tasks][cloud-tasks] 
 APIs locally.
 
 The easiest way to start the emulator is to run the following command:

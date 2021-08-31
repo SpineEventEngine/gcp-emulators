@@ -25,49 +25,18 @@
 #
 
 #
-# This Cloud Build configuration builds the emulators Docker images and stores them
+# This Cloud Build configuration builds Cloud Storage emulator Docker image and stores it
 # in the GCP project of choice.
 #
 steps:
-  - name: "gcr.io/cloud-builders/docker"
-    id: "cloudtasks-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/cloudtasks-emulator",
-        "./cloudtasks-emulator"
-    ]
-    waitFor: [ "-" ]
-
   - name: "gcr.io/cloud-builders/docker"
     id: "cloudstorage-emulator"
     args: [
         "build",
         "-t", "gcr.io/${PROJECT_ID}/cloudstorage-emulator",
-        "./cloudstorage-emulator"
+        "."
     ]
-    waitFor: [ "-" ]
-
-  - name: "gcr.io/cloud-builders/docker"
-    id: "datastore-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/datastore-emulator",
-        "./datastore-emulator"
-    ]
-    waitFor: [ "-" ]
-
-  - name: "gcr.io/cloud-builders/docker"
-    id: "firebase-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/firebase-emulator",
-        "./firebase-emulator"
-    ]
-    waitFor: [ "-" ]
 
 images: [
-    "gcr.io/${PROJECT_ID}/cloudtasks-emulator",
-    "gcr.io/${PROJECT_ID}/cloudstorage-emulator",
-    "gcr.io/${PROJECT_ID}/datastore-emulator",
-    "gcr.io/${PROJECT_ID}/firebase-emulator"
+    "gcr.io/${PROJECT_ID}/cloudstorage-emulator"
 ]

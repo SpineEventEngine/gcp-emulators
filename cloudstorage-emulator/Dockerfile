@@ -24,50 +24,38 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#
-# This Cloud Build configuration builds the emulators Docker images and stores them
-# in the GCP project of choice.
-#
-steps:
-  - name: "gcr.io/cloud-builders/docker"
-    id: "cloudtasks-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/cloudtasks-emulator",
-        "./cloudtasks-emulator"
-    ]
-    waitFor: [ "-" ]
+FROM python:3.7-stretch AS build-env
 
-  - name: "gcr.io/cloud-builders/docker"
-    id: "cloudstorage-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/cloudstorage-emulator",
-        "./cloudstorage-emulator"
-    ]
-    waitFor: [ "-" ]
+RUN python3 -m pip install --upgrade pip wheel setuptools
 
-  - name: "gcr.io/cloud-builders/docker"
-    id: "datastore-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/datastore-emulator",
-        "./datastore-emulator"
-    ]
-    waitFor: [ "-" ]
+# Clone `google-cloud-cpp` repo in order to install the GCS emulator locally. Then go into the
+# emulator folder and install required dependencies.
+RUN git clone https://github.com/googleapis/google-cloud-cpp.git \
+  --branch main \
+  --single-branch \
+  --depth 1 \
+  /cloud-cpp \
+  && cd "cloud-cpp/google/cloud/storage/emulator" \
+  && rm -rf "tests" \
+  && python3 -m pip install -r requirements.txt --no-warn-script-location --no-cache-dir
 
-  - name: "gcr.io/cloud-builders/docker"
-    id: "firebase-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/firebase-emulator",
-        "./firebase-emulator"
-    ]
-    waitFor: [ "-" ]
+FROM python:3.7-slim AS app-env
+LABEL "maintainer"="developers@spine.io"
+LABEL "version"="1.0.0"
+LABEL "io.spine.emulator"="CloudStorage"
 
-images: [
-    "gcr.io/${PROJECT_ID}/cloudtasks-emulator",
-    "gcr.io/${PROJECT_ID}/cloudstorage-emulator",
-    "gcr.io/${PROJECT_ID}/datastore-emulator",
-    "gcr.io/${PROJECT_ID}/firebase-emulator"
-]
+RUN mkdir /configs
+VOLUME /configs
+
+# Copy installed Python packages from the build environment.
+COPY --from=build-env /usr/local/lib/python3.7/site-packages /usr/local/lib/python3.7/site-packages
+# Copy the emulator intself from the build environment.
+COPY --from=build-env /cloud-cpp/google/cloud/storage/emulator /app
+WORKDIR /app
+COPY runner.sh .
+RUN chmod +x runner.sh
+
+ENV EMULATOR_PORT="9199"
+ENV EMULATOR_HOST="0.0.0.0"
+
+ENTRYPOINT [ "./runner.sh" ]

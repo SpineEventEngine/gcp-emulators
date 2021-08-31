@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 #
 # Copyright 2021, TeamDev. All rights reserved.
 #
@@ -25,49 +26,15 @@
 #
 
 #
-# This Cloud Build configuration builds the emulators Docker images and stores them
-# in the GCP project of choice.
+# This script starts the local Cloud Storage emulator at the port denoted by the `EMULATOR_PORT`
+# env variable or `9199` by default.
 #
-steps:
-  - name: "gcr.io/cloud-builders/docker"
-    id: "cloudtasks-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/cloudtasks-emulator",
-        "./cloudtasks-emulator"
-    ]
-    waitFor: [ "-" ]
+# One may additionally configure the `EMULATORS_HOST` env variable to prevent running
+# the emulator in the broadcast `0.0.0.0` mode.
 
-  - name: "gcr.io/cloud-builders/docker"
-    id: "cloudstorage-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/cloudstorage-emulator",
-        "./cloudstorage-emulator"
-    ]
-    waitFor: [ "-" ]
+export EMULATOR_PORT="${EMULATOR_PORT:-9199}"
+export EMULATOR_HOST="${EMULATOR_HOST:-0.0.0.0}"
 
-  - name: "gcr.io/cloud-builders/docker"
-    id: "datastore-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/datastore-emulator",
-        "./datastore-emulator"
-    ]
-    waitFor: [ "-" ]
+EMULATOR_ADDRESS="${EMULATOR_HOST}:${EMULATOR_PORT}"
 
-  - name: "gcr.io/cloud-builders/docker"
-    id: "firebase-emulator"
-    args: [
-        "build",
-        "-t", "gcr.io/${PROJECT_ID}/firebase-emulator",
-        "./firebase-emulator"
-    ]
-    waitFor: [ "-" ]
-
-images: [
-    "gcr.io/${PROJECT_ID}/cloudtasks-emulator",
-    "gcr.io/${PROJECT_ID}/cloudstorage-emulator",
-    "gcr.io/${PROJECT_ID}/datastore-emulator",
-    "gcr.io/${PROJECT_ID}/firebase-emulator"
-]
+python3 -m gunicorn --bind "${EMULATOR_ADDRESS}" --worker-class sync --threads 10 "emulator:run()"

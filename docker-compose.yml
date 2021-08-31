@@ -27,6 +27,14 @@ services:
     environment:
       GCP_PROJECT: "<GCP_PROJECT>"
       EMULATOR_PORT: "9999"
+  cloudstorage-emulator:
+    image: cloudstorage-emulator
+    ports:
+      - target: 9999
+        published: 9199
+        protocol: tcp
+    environment:
+      EMULATOR_PORT: "9999"
   firebase-emulator:
     image: firebase-emulator
     ports:
