@@ -64,8 +64,7 @@ jobs:
           push: true
           tags: |
             spine3/cloudtasks-emulator:latest
-            spine3/cloudtasks-emulator:${GITHUB_SHA}
-            spine3/cloudtasks-emulator:${GITHUB_SHA:0:7}
+            spine3/cloudtasks-emulator:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache-cloudtasks
           cache-to: type=local,dest=/tmp/.buildx-cache-cloudtasks
       - name: Update CloudTasks repo description
@@ -108,8 +107,7 @@ jobs:
           push: true
           tags: |
             spine3/cloudstorage-emulator:latest
-            spine3/cloudstorage-emulator:${GITHUB_SHA}
-            spine3/cloudstorage-emulator:${GITHUB_SHA:0:7}
+            spine3/cloudstorage-emulator:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache-cloudstorage
           cache-to: type=local,dest=/tmp/.buildx-cache-cloudstorage
       - name: Update Cloud Storage repo description
@@ -152,8 +150,7 @@ jobs:
           push: true
           tags: |
             spine3/datastore-emulator:latest
-            spine3/datastore-emulator:${GITHUB_SHA}
-            spine3/datastore-emulator:${GITHUB_SHA:0:7}
+            spine3/datastore-emulator:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache-datastore
           cache-to: type=local,dest=/tmp/.buildx-cache-datastore
       - name: Update Datastore repo description
@@ -196,8 +193,7 @@ jobs:
           push: true
           tags: |
             spine3/firebase-emulator:latest
-            spine3/firebase-emulator:${GITHUB_SHA}
-            spine3/firebase-emulator:${GITHUB_SHA:0:7}
+            spine3/firebase-emulator:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache-firebase
           cache-to: type=local,dest=/tmp/.buildx-cache-firebase
       - name: Update Datastore repo description
