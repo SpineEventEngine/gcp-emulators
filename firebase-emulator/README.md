@@ -1,4 +1,4 @@
-Firebase Emulator Suite container
+Firebase Emulator Suite
 ---------
 
 The [Firebase Emulator Suite][emulator] image allows reducing the hustle of setting up and

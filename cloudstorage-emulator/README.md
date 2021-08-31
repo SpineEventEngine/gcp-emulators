@@ -1,7 +1,7 @@
-Cloud Storage emulator
+Cloud Storage Emulator
 ---------
 
-The [Cloud Storage emulator][emulator] provides a way to work with the [Cloud Storage][cloud-storage] 
+The [Cloud Storage Emulator][emulator] provides a way to work with the [Cloud Storage][cloud-storage] 
 APIs locally.
 
 The easiest way to start the emulator is to run the following command:
