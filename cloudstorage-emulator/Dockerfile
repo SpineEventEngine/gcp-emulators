@@ -41,7 +41,7 @@ RUN git clone https://github.com/googleapis/google-cloud-cpp.git \
 
 FROM python:3.7-slim AS app-env
 LABEL "maintainer"="developers@spine.io"
-LABEL "version"="1.0.0"
+LABEL "version"="1.0.1"
 LABEL "io.spine.emulator"="CloudStorage"
 
 RUN mkdir /configs
