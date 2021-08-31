@@ -103,6 +103,7 @@ jobs:
         with:
           context: ./cloudstorage-emulator
           push: true
+          tags: spine3/cloudstorage-emulator:latest
           cache-from: type=local,src=/tmp/.buildx-cache-cloudstorage
           cache-to: type=local,dest=/tmp/.buildx-cache-cloudstorage
       - name: Update Cloud Storage repo description
