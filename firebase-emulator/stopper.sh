@@ -1,1 +1,0 @@
-firebase emulators:export /firebase/baseline-data --project="${GCP_PROJECT}"

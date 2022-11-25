@@ -53,6 +53,17 @@
 # the emulator in the broadcast `0.0.0.0` mode.
 #
 
+# Term Handler is used to stop firebase emulators process and trigger export-on-exit command
+term_handler() {
+  if [ $pid -ne 0 ]; then
+    kill -SIGTERM "$pid"
+    wait "$pid"
+  fi
+  exit 143; # 128 + 15 -- SIGTERM
+}
+
+trap 'kill ${!}; term_handler' SIGTERM
+
 export GCP_PROJECT="${GCP_PROJECT}"
 export RDB_EMULATOR_PORT="${RDB_EMULATOR_PORT:-9000}"
 export FIRESTORE_EMULATOR_PORT="${FIRESTORE_EMULATOR_PORT:-8080}"
@@ -66,4 +77,10 @@ export EMULATORS_HOST="${EMULATORS_HOST:-0.0.0.0}"
 
 node /process_config.js
 
-firebase emulators:start --project="${GCP_PROJECT}" --import=/firebase/baseline-data --export-on-exit=/firebase/baseline-data
+firebase emulators:start --project="${GCP_PROJECT}" --import=/firebase/baseline-data --export-on-exit=/firebase/baseline-data &
+pid="$!"
+
+while true
+do
+  tail -f /dev/null & wait ${!}
+done

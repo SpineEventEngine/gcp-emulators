@@ -53,10 +53,9 @@ ENV EMULATORS_HOST="0.0.0.0"
 RUN mkdir -p /firebase/baseline-data
 VOLUME /firebase
 
-COPY ./runner.sh ./process_config.js ./LICENSE ./stopper.sh /
+COPY ./runner.sh ./process_config.js ./LICENSE /
 RUN chmod +x /runner.sh
-RUN chmod +x /stopper.sh
 
 WORKDIR /firebase
 
-ENTRYPOINT [ "/runner.sh", "/stopper.sh" ]
+ENTRYPOINT [ "/runner.sh" ]
